@@ -1,10 +1,10 @@
 const container = document.querySelector('#container');
 
 //populate a grid on page load
-for (i = 0; i < Math.pow(64, 2); i++) { 
+for (i = 0; i < Math.pow(16, 2); i++) { 
   const createDiv = document.createElement('div');
   createDiv.classList.add('pixel');
-  let maxWidth = 500 / 64;
+  let maxWidth = 960 / 16;
   createDiv.style.cssText = 'width: ' + maxWidth + 'px';
   container.appendChild(createDiv);
 }
@@ -19,7 +19,7 @@ function createGrid(gridSize) {
   for (i = 0; i < Math.pow(gridSize, 2); i++) { 
       const createDiv = document.createElement('div');
       createDiv.classList.add('pixel');
-      let maxWidth = 500 / gridSize;
+      let maxWidth = 960 / gridSize;
       createDiv.style.cssText = 'width: ' + maxWidth + 'px';
       container.appendChild(createDiv);
   }
