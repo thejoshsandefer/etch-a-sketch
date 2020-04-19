@@ -1,23 +1,42 @@
 const container = document.querySelector('#container');
 
-
-//Create 16 <div> elements
-for (i = 0; i < 16; i++) { 
-    const createDiv = document.createElement('div');
-    createDiv.classList.add('pixel');
-    createDiv.style.cssText = 'background-color: #f2f2f2;  flex: 1 0 21%; height: 100px';
-    container.appendChild(createDiv);
+//populate a grid on page load
+for (i = 0; i < Math.pow(64, 2); i++) { 
+  const createDiv = document.createElement('div');
+  createDiv.classList.add('pixel');
+  let maxWidth = 500 / 64;
+  createDiv.style.cssText = 'width: ' + maxWidth + 'px';
+  container.appendChild(createDiv);
 }
 
-const pixel = document.querySelectorAll('.pixel')
-body.addEventListener('click', event => {
-    if (event.target !== pixel) {
-      return
-    }
-    createDiv.style.cssText = 'background-color: red;';
-});
-// pixel.forEach(pixel => {
-//     addEventListener('hover' , () => {
-//         console.log('hover');
-//     });
-// });
+//Create <div> elements
+function initializeCreateGrid() {
+  let gridSize = prompt('Choose a gride size...', '1-64')
+  createGrid(gridSize);
+}
+
+function createGrid(gridSize) {
+  for (i = 0; i < Math.pow(gridSize, 2); i++) { 
+      const createDiv = document.createElement('div');
+      createDiv.classList.add('pixel');
+      let maxWidth = 500 / gridSize;
+      createDiv.style.cssText = 'width: ' + maxWidth + 'px';
+      container.appendChild(createDiv);
+  }
+}
+
+//Mouseover event listener
+document.addEventListener('mouseover', function(e) {
+  if (e.target.classList.contains('pixel')) {
+    e.target.classList.add('highlighted');
+  }
+})
+
+//Get new grid event
+const btn = document.querySelector('#btn');
+btn.addEventListener('click', function(e) {
+  while (container.hasChildNodes()) {
+    container.removeChild(container.firstChild);
+  }
+  initializeCreateGrid();
+})
